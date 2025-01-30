@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My First Web Page</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header>
+    </header>
+
+    <!-- Navigation Section -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="Pg2.html">About</a></li>
+            <li><a href="Pg4.html">Gallery</a></li>
+            <li><a href="Pg3.html">Contact</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h1>My Photo Gallery</h1>
+        <p>My Photo's</p>
+        <div class="photo-grid">
+            <ul id="album">
+        </ul>
+        </div>
+        <div id="infoBox">
+            <h2 id="infoTitle"></h2>
+            <p id="infoText"></p>
+            <a href="#" id="closeInfo">Click This To Close</a>
+        </div>
+
+    </main>
+    <!-- Footer Section -->
+    <footer>
+        &copy; 2020 Westcliff University. All rights reserved.
+    </footer>
+    </div>
+    <script>
+       
+const photos = [];
+const fileNames = [];
+const imageList = [];
+const descriptions = [
+    "Beautiful snowy landscape",
+    "Frozen lake in the mountains",
+    "Snow-covered forest",
+    "Cozy winter cabin",
+    "Snowfall in the city",
+    "Icy river flowing"
+];
+
+const album = document.getElementById("album");
+const infoBox = document.getElementById("infoBox");
+const infoTitle = document.getElementById("infoTitle");
+const infoText = document.getElementById("infoText");
+const closeInfo = document.getElementById("closeInfo");
+
+
+for (let i = 0; i < 6; i++) {
+    fileNames.push(`winterland${i + 1}`);
+    photos.push(`<img src='Photo/${fileNames[i]}.jpg' alt='Photo ${i + 1}'>`);
+
+    
+    let listItem = document.createElement("li");
+
+    
+    let image = document.createElement("img");
+    image.src = `Photo/${fileNames[i]}.jpg`;
+    image.alt = `Photo ${i + 1}`;
+    image.classList.add("gallery-image");
+
+   
+    let desc = document.createElement("p");
+    desc.textContent = descriptions[i];
+    desc.classList.add("desc");
+    desc.setAttribute("data-index", i); 
+
+   
+    listItem.appendChild(image);
+    listItem.appendChild(desc);
+    album.appendChild(listItem);
+}
+
+
+document.querySelectorAll(".desc").forEach((desc) => {
+    desc.addEventListener("click", function () {
+        let index = this.getAttribute("data-index");
+        infoTitle.textContent = `Photo ${parseInt(index) + 1}`;
+        infoText.textContent = descriptions[index];
+        infoBox.style.display = "block";
+    });
+});
+
+closeInfo.addEventListener("click", function (e) {
+    e.preventDefault();
+    infoBox.style.display = "none";
+});
+
+
+    </script>
+</body>
+
+</html>
